@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36121.58
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleJava.WpfApp1", "OracleJava.WpfApp1\OracleJava.WpfApp1.csproj", "{CABC81E7-8D61-49E7-A16D-275CB2421532}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oraclejava.WpfLibrary.View", "Oraclejava.WpfLibrary.View\Oraclejava.WpfLibrary.View.csproj", "{45459867-0659-407E-BBC9-EAB4B01E454B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleJavaWpfLibrary.ViewModel", "OracleJavaWpfLibrary.ViewModel\OracleJavaWpfLibrary.ViewModel.csproj", "{84B87313-9AD3-4C72-B6A2-4DA223A46D70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oraclejava.WpfApp1.DataModels", "Oraclejava.WpfApp1.DataModels\Oraclejava.WpfApp1.DataModels.csproj", "{8F58A374-FA46-4DDF-89CC-9EDAF1A9FD91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleJava.WpfApp1.DataAccess", "OracleJava.WpfApp1.DataAccess\OracleJava.WpfApp1.DataAccess.csproj", "{AF47543D-B04C-4C90-A158-BB8013D8FC66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleJava.WpfApp1.Cs", "OracleJava.WpfApp1.Cs\OracleJava.WpfApp1.Cs.csproj", "{27BCE7D5-4D10-4D8E-89DB-92F2920DE51B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CABC81E7-8D61-49E7-A16D-275CB2421532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CABC81E7-8D61-49E7-A16D-275CB2421532}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CABC81E7-8D61-49E7-A16D-275CB2421532}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CABC81E7-8D61-49E7-A16D-275CB2421532}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45459867-0659-407E-BBC9-EAB4B01E454B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45459867-0659-407E-BBC9-EAB4B01E454B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45459867-0659-407E-BBC9-EAB4B01E454B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45459867-0659-407E-BBC9-EAB4B01E454B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84B87313-9AD3-4C72-B6A2-4DA223A46D70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84B87313-9AD3-4C72-B6A2-4DA223A46D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84B87313-9AD3-4C72-B6A2-4DA223A46D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84B87313-9AD3-4C72-B6A2-4DA223A46D70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F58A374-FA46-4DDF-89CC-9EDAF1A9FD91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F58A374-FA46-4DDF-89CC-9EDAF1A9FD91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F58A374-FA46-4DDF-89CC-9EDAF1A9FD91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F58A374-FA46-4DDF-89CC-9EDAF1A9FD91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF47543D-B04C-4C90-A158-BB8013D8FC66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF47543D-B04C-4C90-A158-BB8013D8FC66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF47543D-B04C-4C90-A158-BB8013D8FC66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF47543D-B04C-4C90-A158-BB8013D8FC66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27BCE7D5-4D10-4D8E-89DB-92F2920DE51B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27BCE7D5-4D10-4D8E-89DB-92F2920DE51B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27BCE7D5-4D10-4D8E-89DB-92F2920DE51B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27BCE7D5-4D10-4D8E-89DB-92F2920DE51B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D57ECA5-B18A-42CD-81B4-4E595CE3246D}
+	EndGlobalSection
+EndGlobal

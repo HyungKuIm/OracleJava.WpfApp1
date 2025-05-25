@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\Weather\cloud.png" />
+    <None Remove="Images\Weather\rain.png" />
+    <None Remove="Images\Weather\snow.png" />
+    <None Remove="Images\Weather\sun.png" />
+    <None Remove="Images\Weather\thunder.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Oraclejava.WpfLibrary.View\Oraclejava.WpfLibrary.View.csproj" />
+    <ProjectReference Include="..\OracleJavaWpfLibrary.ViewModel\OracleJavaWpfLibrary.ViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Weather\cloud.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Weather\rain.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Weather\snow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Weather\sun.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Weather\thunder.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

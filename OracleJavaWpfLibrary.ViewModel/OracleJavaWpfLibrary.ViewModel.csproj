@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OracleJava.WpfApp1.DataAccess\OracleJava.WpfApp1.DataAccess.csproj" />
+    <ProjectReference Include="..\Oraclejava.WpfApp1.DataModels\Oraclejava.WpfApp1.DataModels.csproj" />
+  </ItemGroup>
+
+</Project>

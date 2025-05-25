@@ -1,0 +1,11 @@
+D:\wpf\OracleJava.WpfApp1\Oraclejava.WpfApp1.DataModels\bin\Debug\net8.0\Oraclejava.WpfApp1.DataModels.deps.json
+D:\wpf\OracleJava.WpfApp1\Oraclejava.WpfApp1.DataModels\bin\Debug\net8.0\Oraclejava.WpfApp1.DataModels.dll
+D:\wpf\OracleJava.WpfApp1\Oraclejava.WpfApp1.DataModels\bin\Debug\net8.0\Oraclejava.WpfApp1.DataModels.pdb
+D:\wpf\OracleJava.WpfApp1\Oraclejava.WpfApp1.DataModels\obj\Debug\net8.0\Oraclejava.WpfApp1.DataModels.GeneratedMSBuildEditorConfig.editorconfig
+D:\wpf\OracleJava.WpfApp1\Oraclejava.WpfApp1.DataModels\obj\Debug\net8.0\Oraclejava.WpfApp1.DataModels.AssemblyInfoInputs.cache
+D:\wpf\OracleJava.WpfApp1\Oraclejava.WpfApp1.DataModels\obj\Debug\net8.0\Oraclejava.WpfApp1.DataModels.AssemblyInfo.cs
+D:\wpf\OracleJava.WpfApp1\Oraclejava.WpfApp1.DataModels\obj\Debug\net8.0\Oraclejava.WpfApp1.DataModels.csproj.CoreCompileInputs.cache
+D:\wpf\OracleJava.WpfApp1\Oraclejava.WpfApp1.DataModels\obj\Debug\net8.0\Oraclejava.WpfApp1.DataModels.dll
+D:\wpf\OracleJava.WpfApp1\Oraclejava.WpfApp1.DataModels\obj\Debug\net8.0\refint\Oraclejava.WpfApp1.DataModels.dll
+D:\wpf\OracleJava.WpfApp1\Oraclejava.WpfApp1.DataModels\obj\Debug\net8.0\Oraclejava.WpfApp1.DataModels.pdb
+D:\wpf\OracleJava.WpfApp1\Oraclejava.WpfApp1.DataModels\obj\Debug\net8.0\ref\Oraclejava.WpfApp1.DataModels.dll
