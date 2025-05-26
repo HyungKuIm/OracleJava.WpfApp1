@@ -12,7 +12,7 @@ public class WeatherRepository : IWeatherRepository
 {
     private static readonly HttpClient client = new HttpClient();
 
-    public async Task<List<Forecast>> GetFiveDayForecastAsync(string city, string apiKey)
+    public async Task<Forecast> GetFiveDayForecastAsync(string city, string apiKey)
     {
         var url = $"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={apiKey}&units=metric";
 
@@ -64,7 +64,7 @@ public class WeatherRepository : IWeatherRepository
             forecastDays.Add(new ForecastDay(hourlyWeatherList, group.Key, minTemp, maxTemp));
         }
 
-        return new List<Forecast> { new Forecast(forecastDays, cityName) };
+        return new Forecast(forecastDays, cityName);
     }
 
     private WeatherDescription MapWeatherDescription(string main)

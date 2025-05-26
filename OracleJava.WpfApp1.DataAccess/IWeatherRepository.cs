@@ -16,6 +16,6 @@ public interface IWeatherRepository
     //Task<Weather> GetWeatherAsync(string city);
     //Task<List<dynamic>> GetFiveDayForecastAsync(string city, string apiKey);
 
-    Task<List<Forecast>> GetFiveDayForecastAsync(string city, string apiKey);
+    Task<Forecast> GetFiveDayForecastAsync(string city, string apiKey);
 
 }

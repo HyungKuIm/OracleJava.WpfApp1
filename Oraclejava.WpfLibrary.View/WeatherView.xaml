@@ -23,7 +23,8 @@
             </Grid>
             <StackPanel Grid.Row="1" VerticalAlignment="Stretch" Orientation="Vertical" HorizontalAlignment="Center">
                 <Image Source="pack://application:,,,/OracleJava.WpfApp1;component/Images/Weather/sun.png" Width="100" Height="100" Margin="0,10,0,10"/>
-
+                <TextBlock Text="{Binding NowWeatherDisplay.Temperature}" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding NowWeatherDisplay.WeatherDescription}" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,20"/>
                 <DataGrid ItemsSource="{Binding ForecastDays}" AutoGenerateColumns="False" IsReadOnly="True" Margin="10">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Date" Binding="{Binding Date}" />

@@ -28,6 +28,19 @@ public class WeatherViewModel : BaseViewModel
         }
     }
 
+    private NowWeatherDisplay nowWeatherDisplay = new();
+    public NowWeatherDisplay NowWeatherDisplay
+    {
+        get => nowWeatherDisplay;
+        set
+        {
+            nowWeatherDisplay = value;
+            OnPropertyChanged();
+        }
+    }
+
+
+
     public WeatherViewModel()
     {
         weatherRepository = new WeatherRepository(); 
@@ -39,10 +52,10 @@ public class WeatherViewModel : BaseViewModel
         //string city = "Seoul";
         string apiKey = "930de60fb21e865b708ed8a777d46835"; // OpenWeatherMap API 키 입력
 
-        var forecasts = await weatherRepository.GetFiveDayForecastAsync(City, apiKey);
+        var forecast = await weatherRepository.GetFiveDayForecastAsync(City, apiKey);
         ForecastDays.Clear();
 
-        foreach (var day in forecasts[0].Days)
+        foreach (var day in forecast.Days)
         {
             var desc = day.HourlyWeather.Count > 0 ? day.HourlyWeather[0].WeatherDescription.ToString() : "N/A";
             ForecastDays.Add(new ForecastDayDisplay
@@ -53,6 +66,31 @@ public class WeatherViewModel : BaseViewModel
                 Weather = desc
             });
         }
+
+        var nowDay = forecast.Days.FirstOrDefault();
+        if (nowDay != null && nowDay.HourlyWeather.Count > 0)
+        {
+            var nowWeather = nowDay.HourlyWeather[0];
+            NowWeatherDisplay = new NowWeatherDisplay
+            {
+                City = nowWeather.City,
+                DateTime = nowWeather.DateTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                Temperature = nowWeather.Temperature.current,
+                WeatherDescription = nowWeather.WeatherDescription.ToString(),
+                WeatherIcon = nowWeather.WeatherIcon
+            };
+        }
+        else
+        {
+            NowWeatherDisplay = new NowWeatherDisplay
+            {
+                City = City,
+                DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                Temperature = 0,
+                WeatherDescription = "N/A",
+                WeatherIcon = string.Empty
+            };
+        }
     }
 }
 
@@ -62,4 +100,13 @@ public class ForecastDayDisplay
     public int Min { get; set; }
     public int Max { get; set; }
     public string Weather { get; set; }
+}
+
+public class NowWeatherDisplay
+{
+    public string City { get; set; }
+    public string DateTime { get; set; }
+    public int Temperature { get; set; }
+    public string WeatherDescription { get; set; }
+    public string WeatherIcon { get; set; }
 }

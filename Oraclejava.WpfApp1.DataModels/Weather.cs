@@ -88,6 +88,21 @@ public class ForecastDay
         Min = min;
         Max = max;
     }
+
+    static Weather GetWeatherForHour(ForecastDay self, int hour)
+    {
+        return self.HourlyWeather.Aggregate((current, next) =>
+            {
+                //if (current.DateTime.Hour == hour)
+                //    return current;
+                //if (next.DateTime.Hour == hour)
+                //    return next;
+                //return current; // 기본값으로 첫 번째 날씨를 반환
+                int diffCurrent = Math.Abs(current.DateTime.Hour - hour);
+                int diffNext = Math.Abs(next.DateTime.Hour - hour);
+                return diffCurrent < diffNext ? current : next;
+            });
+    }
 }
 
 // 기상 예보(5일)
