@@ -1,2 +1,8 @@
 ﻿bin/
 obj/
+OracleJava.WpfApp1/bin
+Oraclejava.WpfApp1.DataModels/bin
+Oraclejava.WpfLibrary.View/bin
+OracleJavaWpfLibrary.ViewModel/bin
+OracleJava.WpfApp1.DataAccess/bin
+.vs
