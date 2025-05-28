@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace OracleJavaWpfLibrary.ViewModel;
 public class WeatherViewModel : BaseViewModel
@@ -39,12 +40,49 @@ public class WeatherViewModel : BaseViewModel
         }
     }
 
+    private string temperatureLabel;
+
+    public string TemperatureLabel
+    {
+        get { return temperatureLabel; }
+        set { temperatureLabel = value; OnPropertyChanged(); }
+    }
+
+    public ICommand TemperatureCommand
+    {
+        get {  return new ActionCommand(action =>
+            {
+                if (TemperatureLabel == "°C")
+                {
+                    TemperatureLabel = "°F";
+                    NowWeatherDisplay.Temperature = (int)(NowWeatherDisplay.Temperature * 9.0 / 5.0 + 32);
+                    foreach (var day in ForecastDays)
+                    {
+                        day.Min = (int)(day.Min * 9.0 / 5.0 + 32);
+                        day.Max = (int)(day.Max * 9.0 / 5.0 + 32);
+                    }
+                }
+                else
+                {
+                    TemperatureLabel = "°C";
+                    NowWeatherDisplay.Temperature = (int)((NowWeatherDisplay.Temperature - 32) * 5.0 / 9.0);
+                    foreach (var day in ForecastDays)
+                    {
+                        day.Min = (int)((day.Min - 32) * 5.0 / 9.0);
+                        day.Max = (int)((day.Max - 32) * 5.0 / 9.0);
+                    }
+                }
+            });
+        }
+    }
 
 
     public WeatherViewModel()
     {
         weatherRepository = new WeatherRepository(); 
         _ = LoadWeatherDataAsync();
+
+        TemperatureLabel = "°C";
     }
 
     private async Task LoadWeatherDataAsync()
@@ -94,19 +132,38 @@ public class WeatherViewModel : BaseViewModel
     }
 }
 
-public class ForecastDayDisplay
+public class ForecastDayDisplay : BaseViewModel
 {
     public string Date { get; set; }
-    public int Min { get; set; }
-    public int Max { get; set; }
+    //public int Min { get; set; }
+    private int min;
+    public int Min
+    {
+        get => min;
+        set { min = value; OnPropertyChanged(); }
+    }
+    //public int Max { get; set; }
+    private int max;
+    public int Max
+    {
+        get => max;
+        set { max = value; OnPropertyChanged(); }
+    }
     public string Weather { get; set; }
 }
 
-public class NowWeatherDisplay
+public class NowWeatherDisplay : BaseViewModel
 {
     public string City { get; set; }
     public string DateTime { get; set; }
-    public int Temperature { get; set; }
+    //public int Temperature { get; set; }
+    private int temperature;
+    public int Temperature
+    {
+        get => temperature;
+        set { temperature = value; OnPropertyChanged(); }
+    }
+
     public string WeatherDescription { get; set; }
     public string WeatherIcon { get; set; }
 }
