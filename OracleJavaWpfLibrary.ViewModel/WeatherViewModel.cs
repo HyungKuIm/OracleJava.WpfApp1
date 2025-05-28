@@ -1,4 +1,5 @@
 ﻿using OracleJava.WpfApp1.DataAccess;
+using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,62 +15,37 @@ public class WeatherViewModel : BaseViewModel
 
     public ObservableCollection<ForecastDayDisplay> ForecastDays { get; set; } = new();
 
-    private string city = "Seoul";
-    public string City
-    {
-        get => city;
-        set
-        {
-            if (city != value)
-            {
-                city = value;
-                OnPropertyChanged();
-                _ = LoadWeatherDataAsync(); // 데이터 새로 고침
-            }
-        }
-    }
 
-    private NowWeatherDisplay nowWeatherDisplay = new();
-    public NowWeatherDisplay NowWeatherDisplay
-    {
-        get => nowWeatherDisplay;
-        set
-        {
-            nowWeatherDisplay = value;
-            OnPropertyChanged();
-        }
-    }
+    public ReactivePropertySlim<string> City { get; }
 
-    private string temperatureLabel;
 
-    public string TemperatureLabel
-    {
-        get { return temperatureLabel; }
-        set { temperatureLabel = value; OnPropertyChanged(); }
-    }
+    public ReactivePropertySlim<NowWeatherDisplay> NowWeatherDisplay { get; }
+
+
+    public ReactivePropertySlim<string> TemperatureLabel { get; }
 
     public ICommand TemperatureCommand
     {
         get {  return new ActionCommand(action =>
             {
-                if (TemperatureLabel == "°C")
+                if (TemperatureLabel.Value == "°C")
                 {
-                    TemperatureLabel = "°F";
-                    NowWeatherDisplay.Temperature = (int)(NowWeatherDisplay.Temperature * 9.0 / 5.0 + 32);
+                    TemperatureLabel.Value = "°F";
+                    NowWeatherDisplay.Value.Temperature.Value = (int)(NowWeatherDisplay.Value.Temperature.Value * 9.0 / 5.0 + 32);
                     foreach (var day in ForecastDays)
                     {
-                        day.Min = (int)(day.Min * 9.0 / 5.0 + 32);
-                        day.Max = (int)(day.Max * 9.0 / 5.0 + 32);
+                        day.Min.Value = (int)(day.Min.Value * 9.0 / 5.0 + 32);
+                        day.Max.Value = (int)(day.Max.Value * 9.0 / 5.0 + 32);
                     }
                 }
                 else
                 {
-                    TemperatureLabel = "°C";
-                    NowWeatherDisplay.Temperature = (int)((NowWeatherDisplay.Temperature - 32) * 5.0 / 9.0);
+                    TemperatureLabel.Value = "°C";
+                    NowWeatherDisplay.Value.Temperature.Value = (int)((NowWeatherDisplay.Value.Temperature.Value - 32) * 5.0 / 9.0);
                     foreach (var day in ForecastDays)
                     {
-                        day.Min = (int)((day.Min - 32) * 5.0 / 9.0);
-                        day.Max = (int)((day.Max - 32) * 5.0 / 9.0);
+                        day.Min.Value = (int)((day.Min.Value - 32) * 5.0 / 9.0);
+                        day.Max.Value  = (int)((day.Max.Value - 32) * 5.0 / 9.0);
                     }
                 }
             });
@@ -79,91 +55,96 @@ public class WeatherViewModel : BaseViewModel
 
     public WeatherViewModel()
     {
+        this.City = new ReactivePropertySlim<string>("Seoul");
+        this.NowWeatherDisplay = new ReactivePropertySlim<NowWeatherDisplay>();
+        this.TemperatureLabel = new ReactivePropertySlim<string>("°C");
+
         weatherRepository = new WeatherRepository(); 
         _ = LoadWeatherDataAsync();
 
-        TemperatureLabel = "°C";
+        
+
+        //TemperatureLabel.Value = "°C";
     }
 
+    // Fix for CS0747 and CS0103 errors in the LoadWeatherDataAsync method
     private async Task LoadWeatherDataAsync()
     {
-        //string city = "Seoul";
         string apiKey = "930de60fb21e865b708ed8a777d46835"; // OpenWeatherMap API 키 입력
 
-        var forecast = await weatherRepository.GetFiveDayForecastAsync(City, apiKey);
+        var forecast = await weatherRepository.GetFiveDayForecastAsync(City.Value, apiKey);
         ForecastDays.Clear();
 
         foreach (var day in forecast.Days)
         {
             var desc = day.HourlyWeather.Count > 0 ? day.HourlyWeather[0].WeatherDescription.ToString() : "N/A";
-            ForecastDays.Add(new ForecastDayDisplay
+            var forecastDayDisplay = new ForecastDayDisplay
             {
-                Date = day.Date.ToString("yyyy-MM-dd"),
-                Min = day.Min,
-                Max = day.Max,
-                Weather = desc
-            });
+                Date = { Value = day.Date.ToString("yyyy-MM-dd") },
+                Min = { Value = day.Min },
+                Max = { Value = day.Max },
+                Weather = { Value = desc }
+            };
+            ForecastDays.Add(forecastDayDisplay);
         }
 
         var nowDay = forecast.Days.FirstOrDefault();
         if (nowDay != null && nowDay.HourlyWeather.Count > 0)
         {
             var nowWeather = nowDay.HourlyWeather[0];
-            NowWeatherDisplay = new NowWeatherDisplay
+            NowWeatherDisplay.Value = new NowWeatherDisplay
             {
-                City = nowWeather.City,
-                DateTime = nowWeather.DateTime.ToString("yyyy-MM-dd HH:mm:ss"),
-                Temperature = nowWeather.Temperature.current,
-                WeatherDescription = nowWeather.WeatherDescription.ToString(),
-                WeatherIcon = nowWeather.WeatherIcon
+                City = { Value = nowWeather.City },
+                DateTime = { Value = nowWeather.DateTime.ToString("yyyy-MM-dd HH:mm:ss") },
+                Temperature = { Value = nowWeather.Temperature.current },
+                WeatherDescription = { Value = nowWeather.WeatherDescription.ToString() },
+                WeatherIcon = { Value = nowWeather.WeatherIcon }
             };
         }
         else
         {
-            NowWeatherDisplay = new NowWeatherDisplay
+            NowWeatherDisplay.Value = new NowWeatherDisplay
             {
-                City = City,
-                DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                Temperature = 0,
-                WeatherDescription = "N/A",
-                WeatherIcon = string.Empty
+                DateTime = { Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") },
+                Temperature = { Value = 0 },
+                WeatherDescription = { Value = "N/A" },
+                WeatherIcon = { Value = string.Empty }
             };
         }
     }
 }
 
-public class ForecastDayDisplay : BaseViewModel
+public class ForecastDayDisplay
 {
-    public string Date { get; set; }
-    //public int Min { get; set; }
-    private int min;
-    public int Min
+
+    public ReactivePropertySlim<string> Date { get; }
+    public ReactivePropertySlim<int> Min { get; }
+    public ReactivePropertySlim<int> Max { get; }
+    public ReactivePropertySlim<string> Weather { get; }
+
+    public ForecastDayDisplay()
     {
-        get => min;
-        set { min = value; OnPropertyChanged(); }
+        Date = new ReactivePropertySlim<string>();
+        Min = new ReactivePropertySlim<int>();
+        Max = new ReactivePropertySlim<int>();
+        Weather = new ReactivePropertySlim<string>();
     }
-    //public int Max { get; set; }
-    private int max;
-    public int Max
-    {
-        get => max;
-        set { max = value; OnPropertyChanged(); }
-    }
-    public string Weather { get; set; }
 }
 
-public class NowWeatherDisplay : BaseViewModel
+public class NowWeatherDisplay 
 {
-    public string City { get; set; }
-    public string DateTime { get; set; }
-    //public int Temperature { get; set; }
-    private int temperature;
-    public int Temperature
-    {
-        get => temperature;
-        set { temperature = value; OnPropertyChanged(); }
-    }
 
-    public string WeatherDescription { get; set; }
-    public string WeatherIcon { get; set; }
+    public ReactivePropertySlim<string> City { get; }
+    public ReactivePropertySlim<string> DateTime { get; }
+    public ReactivePropertySlim<int> Temperature { get; }
+    public ReactivePropertySlim<string> WeatherDescription { get; }
+    public ReactivePropertySlim<string> WeatherIcon { get; }
+    public NowWeatherDisplay()
+    {
+        this.City = new ReactivePropertySlim<string>();
+        this.DateTime = new ReactivePropertySlim<string>();
+        this.Temperature = new ReactivePropertySlim<int>();
+        this.WeatherDescription = new ReactivePropertySlim<string>();
+        this.WeatherIcon = new ReactivePropertySlim<string>();
+    }
 }

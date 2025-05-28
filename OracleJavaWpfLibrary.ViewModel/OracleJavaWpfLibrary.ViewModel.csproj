@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ReactiveProperty" Version="9.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OracleJava.WpfApp1.DataAccess\OracleJava.WpfApp1.DataAccess.csproj" />
     <ProjectReference Include="..\Oraclejava.WpfApp1.DataModels\Oraclejava.WpfApp1.DataModels.csproj" />
   </ItemGroup>
