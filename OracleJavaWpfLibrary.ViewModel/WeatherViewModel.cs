@@ -70,7 +70,7 @@ public class WeatherViewModel : BaseViewModel
     // Fix for CS0747 and CS0103 errors in the LoadWeatherDataAsync method
     private async Task LoadWeatherDataAsync()
     {
-        string apiKey = "930de60fb21e865b708ed8a777d46835"; // OpenWeatherMap API 키 입력
+        string apiKey = "open weather api key"; // OpenWeatherMap API 키 입력
 
         var forecast = await weatherRepository.GetFiveDayForecastAsync(City.Value, apiKey);
         ForecastDays.Clear();
